@@ -1,0 +1,4 @@
+downloading the docker zip file into the shared folder of the VM. Unzip the docker file and run the docker-compose.yml
+commands:
+"docker-compose up -d" or "dcup" (use to initiate the docker)
+"dockps" (list all the docker connections)
