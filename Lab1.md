@@ -1,3 +1,4 @@
+## Prerequisite
 downloading the docker zip file into the shared folder of the VM. Unzip the docker file and run the docker-compose.yml.
 commands:
 "docker-compose up -d" or "dcup" (use to initiate the docker).
@@ -10,6 +11,8 @@ Open wireshark and use the filter on the top bar for "icmp" to see the ping traf
 
 After finished using docker, use "dcdown" to shutdown existing connections.
 ![picture of icmp ping](screenshots/lab1/dcdown.png)
+
+The following tasks requires to follow the documents of [**SEED Labs – Packet Sniffing and Spoofing Lab**](https://seedsecuritylabs.org/Labs_20.04/Files/Sniffing_Spoofing/Sniffing_Spoofing.pdf)
 
 ## **Task 1.1A: Sniffing ICMP**
 Use command 'ifconfig' to check the the iface of the machine, 'br-7652d9fd4808' in this case (note that every time when you initiate docker, the iface can be different.)
