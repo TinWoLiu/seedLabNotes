@@ -11,7 +11,7 @@ Open wireshark and use the filter on the top bar for "icmp" to see the ping traf
 After finished using docker, use "dcdown" to shutdown existing connections.
 ![picture of icmp ping](screenshots/lab1/dcdown.png)
 
-##**Task 1.1A:**
+## **Task 1.1A:**
 Use command 'ifconfig' to check the the iface of the machine.
 ![picture of ifconfig](screenshots/lab1/ifconfig.png)
 
