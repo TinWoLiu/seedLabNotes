@@ -13,7 +13,7 @@ To turn off the countermeasure, set "net.ipv4.tcp_syncookies=0". To turn on the 
 <br>Notes that the command can only performed within a container, we used the victim container.
 
 <br>**Task 1.1: Launching the Attack Using Python**
-We will first create a SYN Flooding script with Python, call "synflood.py".
+<br>We will first create a SYN Flooding script with Python, call "synflood.py".
 ![picture of synflood.py](screenshots/lab2/task1/synfloodpy.png)
 Run the Python script, and observe the results in the victim's container.
 ![picture of synflood.py result](screenshots/lab2/task1/synfloodpyResult.png)
