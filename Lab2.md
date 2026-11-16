@@ -34,6 +34,8 @@ We will then get back into the victim container, and see the result.
 Afterwards, we will turn on the countermeasure, and compare results.
 ![picture of executing the C script with countermeasure](screenshots/lab2/task1/synfloodcSyncookies1.png)
 The reason why the countermeasure has a higher number is because how server process packets. With Cookies OFF, each SYN the server reserves a slot in the backlog queue to hold that connection, the number represent how many slots are in the queue that the server is waiting for an ACK. With Cookies ON, the server do not reserve any slots for SYN, and only wait for a client to send an ACK, then the server will open a slot, the high number represent how many SYN_RECV state it has received.
+
 <br>The reason why this is important, is that when the Cookies is OFF, when the queue is maxed, anymore SYN will get turned away, casuing an DoS(Denial of Service).
+
 <br>But the server is not completely vulnerable during a SYN Flood attack. On Ubuntu 20.04, a kernel mitigation mechanism is implemented, if a known host which has established connection with the server before, tries to connect to the server during a SYN Flood attack, the server will recognize the known host IP address, and establish connection easier. The command to check known host is "ip tcp_metrics show"
 ![picture of known host](screenshots/lab2/task1/victimCachedUser1.png)
