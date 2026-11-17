@@ -50,5 +50,19 @@ The complication of this task, is that the sequence number changes when the clie
 <br>An easier solution is to create an auto script for Python to sniff the details of the latest TCP packet, and put in the those details in the corresponding fields. We will name this script "autoRST.py".
 ![picture of autoRST.py](screenshots/lab2/task2/autoRST.png)
 We will run the "autoRST.py", and observe on WireShark and the client terminal, the Telnet connection should be closed.
-![picture of known host](screenshots/lab2/task2/autoRSTWiredshark.png)
-![picture of known host](screenshots/lab2/task2/RSTTerminal.png)
+![picture of RST Wiredshark](screenshots/lab2/task2/autoRSTWiredshark.png)
+![picture of host terminal](screenshots/lab2/task2/RSTTerminal.png)
+
+## **Task 3: TCP Session Hijacking**
+Similar to task 2, this task requires the student to spoof a packet to the victim. But instead of resetting the Telnet session between hosts, the attacker needs to inject a command to the victim container. We will create a scapy script similar to the RST script.
+![picture of tcpHijack.py](screenshots/lab2/task3/hijackpy.png)
+Same with the RST attack, the student will need to get the correct sequence number, source IP address/port, destination IP address/port, and to **NOT TOUCH THE CLIENT TERMINAL** before running the script. As a proof of concept, the command used to see if the injection was successful, a file will be created in the "/tmp" directory.
+
+<br>Just like the RST script, an auto script is created to perform this task without manually input all the required fields.
+![picture of tcpHijackAuto.py](screenshots/lab2/task3/hijackpyAuto.png)
+We will use Wireshark to listen to the packets. First, create a Telnet session from user1 to user2, and run the Hijack script from the host VM. If you are using the auto script, nothing should happen immediately, because an input is required in the client terminal, which sends a TCP packet, which then the script can sniff the latest packets, and input the corresponding fields, so the injection can commence.
+
+<br>If the injection is successful, Wireshark should show multiple TCP retransmission packets, and the client terminal would froze, unable to input anything. This is because the injection has de-syncronized the sequence of both hosts, the server host sequence number is ahead of the client due to the attacker injected 1 packet to the server host. Now both hosts refuses packets from each other, causing a deadlock.
+![picture of Wireshark result](screenshots/lab2/task3/hijackWiredshark.png)
+Now we go to the server host terminal, and check the contents of the "/tmp" folder, and see if the injected command ran on the machine.
+![picture of injection result](screenshots/lab2/task3/hijackedResult.png)
