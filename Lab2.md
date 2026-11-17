@@ -72,5 +72,5 @@ Simply running one command on a victim's machine is not enough, that is when rev
 ![picture of reverse shell script](screenshots/lab2/task4/AutoBackdoor.png)
 Just like task 3, an Telnet session needs to be created first between user1 and user2. Before running the script, on the VM or attacker container, the student needs to run a command "nc -lnv 9090", this open up port 9090 to accept incoming traffic.
 ![picture of listener](screenshots/lab2/task4/listener.png)
-Now we run the script, and input anything from the client terminal, same as task 3, now both hosts sequence are out of sync. The difference is that now the attacking device has established an Telnet connection with the server host, completing the reverse shell.
+<br>Now we run the script, and input anything from the client terminal, same as task 3, now both hosts sequence are out of sync. The difference is that now the attacking device has established an Telnet connection with the server host, completing the reverse shell.
 ![picture of result](screenshots/lab2/task4/listenerHijacked.png)
