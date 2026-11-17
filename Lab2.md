@@ -12,14 +12,14 @@ The concept of SYN flooding is similar to a Denial of Service attack, overwhelm 
 To turn off the countermeasure, set "net.ipv4.tcp_syncookies=0". To turn on the countermeasure, set "net.ipv4.tcp_syncookies=1".
 <br>Notes that the command can only performed within a container, we used the victim container.
 
-### **3.1 Task 1.1: Launching the Attack Using Python**
+### **Task 1.1: Launching the Attack Using Python**
 We will first create a SYN Flooding script with Python, call "synflood.py".
 ![picture of synflood.py](screenshots/lab2/task1/synfloodpy.png)
 Run the Python script, and observe the results in the victim's container.
 ![picture of synflood.py result](screenshots/lab2/task1/synfloodpyResult.png)
 The default TCP backlog size is 80, one fourth of the backlog is reserved for "proven destinations", so 60 should be the max capacity. The results shows 28 and 29, because Python/Scapy flood is too slow, and cannot fill all the backogs.
 
-### **3.2 Task 1.2: Launch the Attack Using C(language)**
+### **Task 1.2: Launch the Attack Using C(language)**
 
 For this task, we will create a new script with C, Python/Scapy script is not as quick compared with C. We will create the new script named "synflood.c". We will first turn off Ubuntu countermeasure cookie first.
 ![picture of synflood.c](screenshots/lab2/task1/synfloodc.png)
@@ -39,3 +39,16 @@ The reason why the countermeasure has a higher number is because how server proc
 
 <br>But the server is not completely vulnerable during a SYN Flood attack. On Ubuntu 20.04, a kernel mitigation mechanism is implemented, if a known host which has established connection with the server before, tries to connect to the server during a SYN Flood attack, the server will recognize the known host IP address, and establish connection easier. The command to check known host is "ip tcp_metrics show"
 ![picture of known host](screenshots/lab2/task1/victimCachedUser1.png)
+
+## **Task 2: TCP RST Attacks on telnet Connections**
+A TCP RST Attack can terminate an established TCP connections between 2 hosts. The student is required to create a Python script similar to the Spoof script last lab, but this time to reset an alreadt established Telnet connections between 2 hosts, we will Telnet user1 to user2. The script will be named "rst.py".
+![picture of rst.py](screenshots/lab2/task2/rst.png)
+Flag "R" stands for "Reset", the student will need to use the client IP address and source port as "src" and "sport"(default Telnet source port is 23), while the server IP address and destination port as "dst" and "dport". The student will need to use WireShark to sniff packets for details.
+![picture of telnet details](screenshots/lab2/task2/RSTWiredshark.png)
+The complication of this task, is that the sequence number changes when the client enters any inputs in the terminal, it is important that the student to **NOT TOUCH THE CLIENT TERMINAL** when performing this task. Sometimes the Telnet will retransmit a TCP request to keep the Telnet connection alive, so speed on modifying the Python script is also the essence.
+
+<br>An easier solution is to create an auto script for Python to sniff the details of the latest TCP packet, and put in the those details in the corresponding fields. We will name this script "autoRST.py".
+![picture of autoRST.py](screenshots/lab2/task2/autoRST.png)
+We will run the "autoRST.py", and observe on WireShark and the client terminal, the Telnet connection should be closed.
+![picture of known host](screenshots/lab2/task2/autoRSTWiredshark.png)
+![picture of known host](screenshots/lab2/task2/RSTTerminal.png)
