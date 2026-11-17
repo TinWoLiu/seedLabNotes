@@ -41,7 +41,7 @@ The reason why the countermeasure has a higher number is because how server proc
 ![picture of known host](screenshots/lab2/task1/victimCachedUser1.png)
 
 ## **Task 2: TCP RST Attacks on telnet Connections**
-A TCP RST Attack can terminate an established TCP connections between 2 hosts. The student is required to create a Python script similar to the Spoof script last lab, but this time to reset an alreadt established Telnet connections between 2 hosts, we will Telnet user1 to user2. The script will be named "rst.py".
+A TCP RST Attack can terminate an established TCP connections between 2 hosts. The student is required to create a Python script similar to the Spoof script last lab, but this time to reset an already established Telnet connections between 2 hosts, we will Telnet user1 to user2. The script will be named "rst.py".
 ![picture of rst.py](screenshots/lab2/task2/rst.png)
 Flag "R" stands for "Reset", the student will need to use the client IP address and source port as "src" and "sport"(default Telnet source port is 23), while the server IP address and destination port as "dst" and "dport". The student will need to use WireShark to sniff packets for details.
 ![picture of telnet details](screenshots/lab2/task2/RSTWiredshark.png)
