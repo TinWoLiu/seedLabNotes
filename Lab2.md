@@ -60,9 +60,17 @@ Same with the RST attack, the student will need to get the correct sequence numb
 
 <br>Just like the RST script, an auto script is created to perform this task without manually input all the required fields.
 ![picture of tcpHijackAuto.py](screenshots/lab2/task3/hijackpyAuto.png)
-We will use Wireshark to listen to the packets. First, create a Telnet session from user1 to user2, and run the Hijack script from the host VM. If you are using the auto script, nothing should happen immediately, because an input is required in the client terminal, which sends a TCP packet, which then the script can sniff the latest packets, and input the corresponding fields, so the injection can commence.
+We will use Wireshark to listen to the packets. First, create a Telnet session from user1 to user2, and run the Hijack script from the VM or attacker container. If you are using the auto script, nothing should happen immediately, because an input is required in the client terminal, which sends a TCP packet, which then the script can sniff the latest packets, and input the corresponding fields, so the injection can commence.
 
 <br>If the injection is successful, Wireshark should show multiple TCP retransmission packets, and the client terminal would froze, unable to input anything. This is because the injection has de-syncronized the sequence of both hosts, the server host sequence number is ahead of the client due to the attacker injected 1 packet to the server host. Now both hosts refuses packets from each other, causing a deadlock.
 ![picture of Wireshark result](screenshots/lab2/task3/hijackWiredshark.png)
 Now we go to the server host terminal, and check the contents of the "/tmp" folder, and see if the injected command ran on the machine.
 ![picture of injection result](screenshots/lab2/task3/hijackedResult.png)
+
+## **Task 4: Creating Reverse Shell using TCP Session Hijacking**
+Simply running one command on a victim's machine is not enough, that is when reverse shell comes in, this allows the attacker to create a new Telnet session between the attacker and the server host. We will create a new script that is based on the Hijack script, we will use the auto script to simplified this task.
+![picture of reverse shell script](screenshots/lab2/task4/AutoBackdoor.png)
+Just like task 3, an Telnet session needs to be created first between user1 and user2. Before running the script, on the VM or attacker container, the student needs to run a command "nc -lnv 9090", this open up port 9090 to accept incoming traffic.
+![picture of listener](screenshots/lab2/task4/listener.png)
+Now we run the script, and input anything from the client terminal, same as task 3, now both hosts sequence are out of sync. The difference is that now the attacking device has established an Telnet connection with the server host, completing the reverse shell.
+![picture of result](screenshots/lab2/task4/listenerHijacked.png)
